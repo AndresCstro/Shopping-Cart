@@ -35,13 +35,17 @@
 
                 <div class="card-body">
 
-                    <form th:action="@{/products/edit/{id}(id=${product.id})}"
+                    <form th:action="@{/products/save}"
                           method="post">
 
                         <!-- CSRF token -->
                         <input type="hidden"
                                th:name="${_csrf.parameterName}"
                                th:value="${_csrf.token}">
+                               
+                        <input type="hidden"
+					           name="id"
+					           th:value="${product.id}">
 
                         <div class="mb-3">
                             <label for="name" class="form-label">

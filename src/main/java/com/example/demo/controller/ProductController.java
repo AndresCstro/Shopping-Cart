@@ -1,5 +1,5 @@
 package com.example.demo.controller;
-import java.util.Optional;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,24 +41,23 @@ public class ProductController {
 	public String addProductForm(Model model) {
 		model.addAttribute("product", new Product());
 		
-		return "product-form";
+		return "product_form";
 	}
 	
 	// Editar formulario de producto existente (manejar excepción)
 	@GetMapping("/edit/{id}")
 	public String editProductForm(@PathVariable Long id, Model model)
 	{
-		// Si no existe devuelvo error y si existe devuelvo su form
-		Optional<Product> p = productService.getProductById(id);
-		if (p.isEmpty())
-		{
-			model.addAttribute("error", "Producto no encontrado" + id);
-			return "error";
-		}
+		Product p = productService.getProductById(id)
+                .orElseThrow(() ->
+                    new IllegalArgumentException(
+                        "Producto no encontrado: " + id
+                    )
+                );
 		
-		model.addAttribute("product", p.get());
+		model.addAttribute("product", p);
 		
-		return "product-form";
+		return "product_form";
 	}
 	
 	// Guardar producto nuevo o editado

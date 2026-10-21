@@ -35,7 +35,7 @@ public class CartController {
 	}
 	
 	// Añadir un producto en base a su id
-	@PostMapping("/add/{id")
+	@PostMapping("/add/{id}")
 	public String addItem(@PathVariable Long id)
 	{
 		// Puede que exista o no --> Optional

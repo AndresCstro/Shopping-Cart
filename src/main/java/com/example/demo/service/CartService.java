@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.context.annotation.SessionScope;
 import com.example.demo.model.Product;
 
 @Service
+@SessionScope
 public class CartService {
 
 	// El carrito se almacena en memoria
